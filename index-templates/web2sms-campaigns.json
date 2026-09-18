@@ -1,0 +1,171 @@
+{
+  "index_patterns": [
+    "web2sms-campaigns-*"
+  ],
+  "priority": 200,
+  "composed_of": [],
+  "template": {
+    "settings": {
+      "index": {
+        "number_of_shards": "1",
+        "number_of_replicas": "0",
+        "refresh_interval": "5s"
+      }
+    },
+    "mappings": {
+      "dynamic": true,
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "accountId": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "basicPrice": {
+          "type": "double"
+        },
+        "billingMSISDN": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "campaignAgency": {
+          "type": "keyword"
+        },
+        "campaignClient": {
+          "type": "keyword"
+        },
+        "campaignId": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "campaignName": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "campaignPrice": {
+          "type": "double"
+        },
+        "campaignType": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "encrypted": {
+          "type": "boolean"
+        },
+        "endTimestamp": {
+          "type": "date",
+          "format": "yyyyMMddHHmmss",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "endTimestamp_parsed": {
+          "type": "date"
+        },
+        "frequency": {
+          "type": "keyword"
+        },
+        "lbaTemplates": {
+          "type": "text"
+        },
+        "numberOfCriteria": {
+          "type": "integer"
+        },
+        "pipeline": {
+          "type": "keyword"
+        },
+        "processingDate": {
+          "type": "date",
+          "format": "yyyyMMddHHmmss",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "segCount": {
+          "type": "integer"
+        },
+        "sender": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "smsCount": {
+          "type": "integer"
+        },
+        "smsPrice": {
+          "type": "double"
+        },
+        "smsText": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "startTimestamp": {
+          "type": "date",
+          "format": "yyyyMMddHHmmss",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "startTimestamp_parsed": {
+          "type": "date"
+        },
+        "status": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "tagIds": {
+          "type": "keyword"
+        },
+        "tier": {
+          "type": "keyword"
+        },
+        "tierBasePrice": {
+          "type": "double"
+        },
+        "whiteLists": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

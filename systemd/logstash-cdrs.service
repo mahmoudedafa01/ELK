@@ -1,0 +1,16 @@
+[Unit]
+Description=Logstash CDRs Service
+After=network.target
+
+[Service]
+Type=simple
+User=mahmoud-mattar
+WorkingDirectory=/work/ELK/logstash-9.3.0
+ExecStart=/work/ELK/logstash-9.3.0/bin/logstash -f /work/ELK/logstash-9.3.0/config/logstash-cdrs.conf
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

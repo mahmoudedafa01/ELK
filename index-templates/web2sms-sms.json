@@ -1,0 +1,135 @@
+{
+  "index_patterns": [
+    "web2sms-sms-*"
+  ],
+  "priority": 200,
+  "composed_of": [],
+  "template": {
+    "settings": {
+      "index": {
+        "number_of_shards": "1",
+        "number_of_replicas": "0",
+        "refresh_interval": "5s"
+      }
+    },
+    "mappings": {
+      "dynamic": true,
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "account_id": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "billing": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "camp_id": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "campname": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "delivery_date": {
+          "type": "date",
+          "format": "yyyyMMddHHmmss"
+        },
+        "encrypted": {
+          "type": "boolean"
+        },
+        "language": {
+          "type": "keyword"
+        },
+        "operator": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "pipeline": {
+          "type": "keyword"
+        },
+        "reciver": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "seg_count": {
+          "type": "integer"
+        },
+        "sendername": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "sms_id": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "sms_text": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "smsText": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "status": {
+          "type": "keyword",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "time": {
+          "type": "date",
+          "format": "yyyyMMddHHmmss"
+        }
+      }
+    }
+  }
+}

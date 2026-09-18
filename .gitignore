@@ -1,0 +1,34 @@
+# /work/ELK is a 3.7 GB runtime tree: downloaded Elastic distributions, indexed
+# data, CDR exports, registries and logs. None of that belongs in version control.
+#
+# Strategy: ignore everything, then re-include only the hand-written configuration.
+# Git will not descend into an ignored directory, so each level has to be
+# un-ignored before its contents can be selected.
+
+/*
+
+!.gitignore
+!README.md
+!start-elk.sh
+!systemd/
+!index-templates/
+
+# --- Logstash pipeline ---
+!logstash-9.3.0/
+logstash-9.3.0/*
+!logstash-9.3.0/config/
+logstash-9.3.0/config/*
+!logstash-9.3.0/config/logstash-cdrs.conf
+
+# --- Filebeat shipper ---
+!filebeat-9.3.0-linux-x86_64/
+filebeat-9.3.0-linux-x86_64/*
+!filebeat-9.3.0-linux-x86_64/filebeat-cdrs.yml
+
+# --- Never commit, regardless of the rules above ---
+.elk-env
+*.keystore
+**/logstash.keystore
+**/elasticsearch.keystore
+*.out
+*.log

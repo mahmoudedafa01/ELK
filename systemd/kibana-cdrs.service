@@ -1,0 +1,14 @@
+[Unit]
+Description=Kibana CDRs Service
+After=network.target elasticsearch-cdrs.service
+
+[Service]
+Type=simple
+User=mahmoud-mattar
+WorkingDirectory=/work/ELK/kibana-9.3.0
+ExecStart=/work/ELK/kibana-9.3.0/bin/kibana
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

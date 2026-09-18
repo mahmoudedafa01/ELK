@@ -1,0 +1,39 @@
+filebeat.inputs:
+  # --- النوع الأول: SMS Logs ---
+  - type: filestream
+    enabled: true
+    id: sms-csv-input-v2
+    paths:
+      - /work/ELK/elk_cdr/sms/*.csv
+    fields:
+      log_type: "sms"
+    # CDR files are write-once with unique, minute-stamped names, so the filename is
+    # the correct identity. Content fingerprinting collided: campaign CDRs are often
+    # byte-identical, which made Filebeat treat hundreds of distinct files as one.
+    prospector.scanner.fingerprint.enabled: false
+    file_identity.path: {}
+    ignore_older: 80h
+
+  # --- النوع الثاني: Campaigns Logs ---
+  - type: filestream
+    enabled: true
+    id: campaigns-csv-input-v2
+    paths:
+      - /work/ELK/elk_cdr/campaigns/*.csv
+    fields:
+      log_type: "campaign"
+    prospector.scanner.fingerprint.enabled: false
+    file_identity.path: {}
+    ignore_older: 80h
+
+output.logstash:
+  hosts: ["localhost:5045"]
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /work/ELK/filebeat-9.3.0-linux-x86_64/service-logs
+  name: filebeat-cdrs.log
+  keepfiles: 3
+
+filebeat.registry.path: /work/ELK/.filebeat-cdrs-registry
