@@ -19,8 +19,14 @@ Web2SMS EARs                 Filebeat                Logstash              Elast
   ELKCDRTask          →   filebeat-cdrs.yml   →   logstash-cdrs.conf   →   web2sms-sms-*
   ELKCDRTaskCampaigns     (filestream tail)       (:5045 beats in)         web2sms-campaigns-*
         │
-        └─ writes CSV CDRs to /work/ELK/elk_cdr/{sms,campaigns}/
+        └─ writes CSV CDRs to /opt/jboss-eap-8.1.9/runtime/app/web2sms-core/cdrs/{elk_cdr,elk_camp_cdr}/
 ```
+
+**Since 2026-11-05 the source is the JBoss EAP 8.1 runtime on this host** (Web2SMS-Core, tasks run by
+`scheduler.ear`); Filebeat reads its export directories in place (inputs `sms-csv-input-eap81`,
+`campaigns-csv-input-eap81`). Before that, the WebLogic export was copied every minute by cron
+(`docker cp vss2-dev:…/cdrs/elk_cdr|elk_camp_cdr` → `/work/ELK/elk_cdr/{sms,campaigns}/`, inputs `…-v2`);
+that directory and the registry state of the old inputs are kept untouched.
 
 ## What is tracked
 
