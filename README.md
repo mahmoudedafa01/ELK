@@ -19,8 +19,12 @@ Web2SMS EARs                 Filebeat                Logstash              Elast
   ELKCDRTask          →   filebeat-cdrs.yml   →   logstash-cdrs.conf   →   web2sms-sms-*
   ELKCDRTaskCampaigns     (filestream tail)       (:5045 beats in)         web2sms-campaigns-*
         │
-        └─ writes CSV CDRs to /opt/jboss-eap-8.1.9/runtime/app/web2sms-core/cdrs/{elk_cdr,elk_camp_cdr}/
+        └─ writes CSV CDRs to /opt/jboss-eap-8.1/bin/web2sms-core/cdrs/{elk_cdr,elk_camp_cdr}/
 ```
+
+**Since 2026-11-19 the EAP server is `/opt/jboss-eap-8.1`** (EAP 8.1 GA, sprint-1/production layout: the server runs
+from `bin/`, so the application folders are `bin/<app>`). Until then the export was under
+`/opt/jboss-eap-8.1.9/runtime/app/web2sms-core/cdrs/` (same inputs, files identified by path).
 
 **Since 2026-11-05 the source is the JBoss EAP 8.1 runtime on this host** (Web2SMS-Core, tasks run by
 `scheduler.ear`); Filebeat reads its export directories in place (inputs `sms-csv-input-eap81`,

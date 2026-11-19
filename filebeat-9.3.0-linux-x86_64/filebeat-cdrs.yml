@@ -5,9 +5,12 @@ filebeat.inputs:
     # 2026-11-05: source = the Web2SMS-Core ELK CDR export of the JBoss EAP 8.1 runtime on this host (ELKCDRTask, run by
     # scheduler.ear), read in place. Until then the WebLogic export was copied by cron from the vss2-dev container into
     # /work/ELK/elk_cdr/sms (input id sms-csv-input-v2; its registry state is kept untouched under that id).
+    # 2026-11-19: the EAP server is now /opt/jboss-eap-8.1 in the sprint-1/production layout: it runs from bin/, so the
+    # export is under bin/web2sms-core (was /opt/jboss-eap-8.1.9/runtime/app/web2sms-core). Same input id; files are
+    # identified by path, and re-reading one is harmless (Logstash document_id = sms_id).
     id: sms-csv-input-eap81
     paths:
-      - /opt/jboss-eap-8.1.9/runtime/app/web2sms-core/cdrs/elk_cdr/*.csv
+      - /opt/jboss-eap-8.1/bin/web2sms-core/cdrs/elk_cdr/*.csv
     fields:
       log_type: "sms"
     # CDR files are write-once with unique, minute-stamped names, so the filename is
@@ -21,9 +24,11 @@ filebeat.inputs:
   - type: filestream
     enabled: true
     # 2026-11-05: EAP 8.1 ELKCDRTaskCampaigns export (was: /work/ELK/elk_cdr/campaigns, id campaigns-csv-input-v2).
+    # 2026-11-19: now /opt/jboss-eap-8.1/bin/web2sms-core (see above); re-reading is harmless (document_id
+    # campaignId_processingDate + external_gte).
     id: campaigns-csv-input-eap81
     paths:
-      - /opt/jboss-eap-8.1.9/runtime/app/web2sms-core/cdrs/elk_camp_cdr/*.csv
+      - /opt/jboss-eap-8.1/bin/web2sms-core/cdrs/elk_camp_cdr/*.csv
     fields:
       log_type: "campaign"
     prospector.scanner.fingerprint.enabled: false
